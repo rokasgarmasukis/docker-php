@@ -3,7 +3,11 @@ services:
   web:
     image: nginx:latest
     ports:
-      - 80:80 # localhost:container
-  app:
-    build:
-      dockerfile: dockerfile
+      - 8001:80 # localhost:container
+    volumes: # mapping like ports above
+      - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+  app: # to build separately: docker build -t rg:php81 -f php/Dockerfile .
+    build: # instead of using some default image, we build our own here usind a dockerfile - still using a base image for that - see Dockerfile
+      dockerfile: ./php/Dockerfile
+    volumes:
+      - ./app:/app
