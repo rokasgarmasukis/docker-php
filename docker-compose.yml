@@ -1,0 +1,9 @@
+services:
+  # nginx
+  web:
+    image: nginx:latest
+    ports:
+      - 80:80 # localhost:container
+  app:
+    build:
+      dockerfile: dockerfile
